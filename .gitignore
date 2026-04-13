@@ -1,0 +1,31 @@
+# Build artifacts
+bin/
+obj/
+out/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.vs/
+
+# Logs
+*.log
+
+# SQLite
+*.db
+*.db-shm
+*.db-wal
+
+# Node / frontend
+node_modules/
+dist/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# macOS
+.DS_Store
