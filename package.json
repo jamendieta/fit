@@ -1,0 +1,15 @@
+{
+  "name": "taskmanagement-dev",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "concurrently -n BACKEND,FRONTEND -c green,cyan \"sh -c 'if lsof -tiTCP:5082 -sTCP:LISTEN >/dev/null; then echo Backend already running on http://localhost:5082; echo Swagger available at http://localhost:5082/swagger; echo Frontend will run on http://localhost:5173; else dotnet run --project src/TaskManagement.Presentation --launch-profile http; fi'\" \"npm --prefix src/TaskManagement.Presentation/frontend run dev\"",
+    "dev:backend": "dotnet run --project src/TaskManagement.Presentation --launch-profile http",
+    "dev:frontend": "npm --prefix src/TaskManagement.Presentation/frontend run dev",
+    "build": "dotnet build && npm --prefix src/TaskManagement.Presentation/frontend run build",
+    "test": "dotnet test"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}

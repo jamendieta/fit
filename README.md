@@ -48,6 +48,19 @@ cd src/TaskManagement.Presentation
 dotnet run --launch-profile http
 ```
 API runs on `http://localhost:5082`.
+Swagger UI runs on `http://localhost:5082/swagger`.
+
+## Run Frontend + Backend Together (recommended)
+```bash
+cd /Users/jimmyandresmendietarivera/Documents/fit
+npm install
+npm run dev
+```
+This starts:
+- Backend: `http://localhost:5082`
+- Frontend: `http://localhost:5173`
+
+Frontend uses Vite proxy to call `/api/*` against the backend automatically.
 
 ## Run Frontend
 ```bash

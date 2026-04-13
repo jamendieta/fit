@@ -1,7 +1,7 @@
 <script setup>
 import { computed, onMounted, reactive, ref } from 'vue'
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5082'
+const API_URL = import.meta.env.VITE_API_URL || ''
 
 const auth = reactive({
   token: localStorage.getItem('token') || '',
