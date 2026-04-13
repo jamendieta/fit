@@ -56,8 +56,13 @@ cd /Users/jimmyandresmendietarivera/Documents/fit
 npm install
 npm run dev
 ```
-This starts:
-- Backend: `http://localhost:5082`
+Behavior of `npm run dev`:
+- If backend is not running, it starts backend on `http://localhost:5082` and frontend on `http://localhost:5173`.
+- If backend is already running on `http://localhost:5082`, it does not restart it and keeps frontend running on `http://localhost:5173`.
+
+The terminal prints useful URLs on startup:
+- API: `http://localhost:5082`
+- Swagger: `http://localhost:5082/swagger`
 - Frontend: `http://localhost:5173`
 
 Frontend uses Vite proxy to call `/api/*` against the backend automatically.
@@ -75,7 +80,7 @@ Create `.env` in `src/TaskManagement.Presentation/frontend`:
 ```bash
 VITE_API_URL=http://localhost:5082
 ```
-If not provided, it defaults to `http://localhost:5082`.
+If not provided, frontend uses relative `/api` paths (recommended for local dev with Vite proxy).
 
 ## Run Tests
 ```bash
