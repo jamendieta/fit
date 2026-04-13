@@ -1,4 +1,3 @@
-using TaskManagement.Core.Entities;
 using TaskManagement.Core.Interfaces;
 using TaskEntity = TaskManagement.Core.Entities.Task;
 
@@ -13,22 +12,22 @@ public class TaskService
         _taskRepository = taskRepository;
     }
 
-    public async System.Threading.Tasks.Task<IEnumerable<TaskEntity>> GetAllTasksAsync()
+    public async Task<IEnumerable<TaskEntity>> GetAllTasksAsync()
     {
         return await _taskRepository.GetAllAsync();
     }
 
-    public async System.Threading.Tasks.Task<TaskEntity?> GetTaskByIdAsync(int id)
+    public async Task<TaskEntity?> GetTaskByIdAsync(int id)
     {
         return await _taskRepository.GetByIdAsync(id);
     }
 
-    public async System.Threading.Tasks.Task<IEnumerable<TaskEntity>> GetTasksByUserIdAsync(int userId)
+    public async Task<IEnumerable<TaskEntity>> GetTasksByUserIdAsync(int userId)
     {
         return await _taskRepository.GetByUserIdAsync(userId);
     }
 
-    public async System.Threading.Tasks.Task AddTaskAsync(TaskEntity task)
+    public async Task AddTaskAsync(TaskEntity task)
     {
         if (string.IsNullOrWhiteSpace(task.Title))
             throw new ArgumentException("Title is required");
@@ -39,7 +38,7 @@ public class TaskService
         await _taskRepository.AddAsync(task);
     }
 
-    public async System.Threading.Tasks.Task UpdateTaskAsync(TaskEntity task)
+    public async Task UpdateTaskAsync(TaskEntity task)
     {
         var existing = await _taskRepository.GetByIdAsync(task.Id);
         if (existing == null)
@@ -51,7 +50,7 @@ public class TaskService
         await _taskRepository.UpdateAsync(task);
     }
 
-    public async System.Threading.Tasks.Task DeleteTaskAsync(int id)
+    public async Task DeleteTaskAsync(int id)
     {
         var existing = await _taskRepository.GetByIdAsync(id);
         if (existing == null)

@@ -14,12 +14,12 @@ public class UserService
         _userRepository = userRepository;
     }
 
-    public async System.Threading.Tasks.Task<User?> GetUserByIdAsync(int id)
+    public async Task<User?> GetUserByIdAsync(int id)
     {
         return await _userRepository.GetByIdAsync(id);
     }
 
-    public async System.Threading.Tasks.Task<User?> GetUserByUsernameAsync(string username)
+    public async Task<User?> GetUserByUsernameAsync(string username)
     {
         return await _userRepository.GetByUsernameAsync(username);
     }
@@ -43,7 +43,7 @@ public class UserService
         await _userRepository.AddAsync(user);
     }
 
-    public async System.Threading.Tasks.Task<User?> ValidateUserAsync(string username, string password)
+    public async Task<User?> ValidateUserAsync(string username, string password)
     {
         var user = await _userRepository.GetByUsernameAsync(username);
         if (user == null)

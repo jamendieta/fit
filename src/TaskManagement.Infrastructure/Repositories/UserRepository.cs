@@ -13,7 +13,7 @@ public class UserRepository : IUserRepository
         _connectionString = connectionString;
     }
 
-    public async System.Threading.Tasks.Task<User?> GetByIdAsync(int id)
+    public async Task<User?> GetByIdAsync(int id)
     {
         using var connection = new SqliteConnection(_connectionString);
         await connection.OpenAsync();
@@ -34,7 +34,7 @@ public class UserRepository : IUserRepository
         return null;
     }
 
-    public async System.Threading.Tasks.Task<User?> GetByUsernameAsync(string username)
+    public async Task<User?> GetByUsernameAsync(string username)
     {
         using var connection = new SqliteConnection(_connectionString);
         await connection.OpenAsync();

@@ -1,5 +1,4 @@
 using Microsoft.Data.Sqlite;
-using TaskManagement.Core.Entities;
 using TaskManagement.Core.Interfaces;
 using TaskEntity = TaskManagement.Core.Entities.Task;
 
@@ -14,7 +13,7 @@ public class TaskRepository : ITaskRepository
         _connectionString = connectionString;
     }
 
-    public async System.Threading.Tasks.Task<IEnumerable<TaskEntity>> GetAllAsync()
+    public async Task<IEnumerable<TaskEntity>> GetAllAsync()
     {
         var tasks = new List<TaskEntity>();
         using var connection = new SqliteConnection(_connectionString);
@@ -29,7 +28,7 @@ public class TaskRepository : ITaskRepository
                 Id = reader.GetInt32(0),
                 Title = reader.GetString(1),
                 Description = reader.GetString(2),
-                Status = (TaskManagement.Core.Entities.TaskStatus)reader.GetInt32(3),
+                Status = (Core.Entities.TaskStatus)reader.GetInt32(3),
                 DueDate = reader.GetDateTime(4),
                 UserId = reader.GetInt32(5)
             });
@@ -37,7 +36,7 @@ public class TaskRepository : ITaskRepository
         return tasks;
     }
 
-    public async System.Threading.Tasks.Task<TaskEntity?> GetByIdAsync(int id)
+    public async Task<TaskEntity?> GetByIdAsync(int id)
     {
         using var connection = new SqliteConnection(_connectionString);
         await connection.OpenAsync();
@@ -52,7 +51,7 @@ public class TaskRepository : ITaskRepository
                 Id = reader.GetInt32(0),
                 Title = reader.GetString(1),
                 Description = reader.GetString(2),
-                Status = (TaskManagement.Core.Entities.TaskStatus)reader.GetInt32(3),
+                Status = (Core.Entities.TaskStatus)reader.GetInt32(3),
                 DueDate = reader.GetDateTime(4),
                 UserId = reader.GetInt32(5)
             };
@@ -60,7 +59,7 @@ public class TaskRepository : ITaskRepository
         return null;
     }
 
-    public async System.Threading.Tasks.Task<IEnumerable<TaskEntity>> GetByUserIdAsync(int userId)
+    public async Task<IEnumerable<TaskEntity>> GetByUserIdAsync(int userId)
     {
         var tasks = new List<TaskEntity>();
         using var connection = new SqliteConnection(_connectionString);
@@ -76,7 +75,7 @@ public class TaskRepository : ITaskRepository
                 Id = reader.GetInt32(0),
                 Title = reader.GetString(1),
                 Description = reader.GetString(2),
-                Status = (TaskManagement.Core.Entities.TaskStatus)reader.GetInt32(3),
+                Status = (Core.Entities.TaskStatus)reader.GetInt32(3),
                 DueDate = reader.GetDateTime(4),
                 UserId = reader.GetInt32(5)
             });
@@ -84,7 +83,7 @@ public class TaskRepository : ITaskRepository
         return tasks;
     }
 
-    public async System.Threading.Tasks.Task AddAsync(TaskEntity task)
+    public async Task AddAsync(TaskEntity task)
     {
         using var connection = new SqliteConnection(_connectionString);
         await connection.OpenAsync();
@@ -98,7 +97,7 @@ public class TaskRepository : ITaskRepository
         task.Id = Convert.ToInt32(await command.ExecuteScalarAsync());
     }
 
-    public async System.Threading.Tasks.Task UpdateAsync(TaskEntity task)
+    public async Task UpdateAsync(TaskEntity task)
     {
         using var connection = new SqliteConnection(_connectionString);
         await connection.OpenAsync();
@@ -113,7 +112,7 @@ public class TaskRepository : ITaskRepository
         await command.ExecuteNonQueryAsync();
     }
 
-    public async System.Threading.Tasks.Task DeleteAsync(int id)
+    public async Task DeleteAsync(int id)
     {
         using var connection = new SqliteConnection(_connectionString);
         await connection.OpenAsync();

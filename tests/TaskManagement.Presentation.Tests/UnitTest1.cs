@@ -14,14 +14,14 @@ public class UnitTest1 : IClassFixture<WebApplicationFactory<Program>>
     }
 
     [Fact]
-    public async System.Threading.Tasks.Task PublicPing_ReturnsOk()
+    public async Task PublicPing_ReturnsOk()
     {
         var response = await _client.GetAsync("/api/users/public-ping");
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
     [Fact]
-    public async System.Threading.Tasks.Task Login_WithSeedCredentials_ReturnsToken()
+    public async Task Login_WithSeedCredentials_ReturnsToken()
     {
         var response = await _client.PostAsJsonAsync("/api/users/login", new
         {

@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
 using TaskManagement.Application.Services;
-using TaskManagement.Core.Entities;
 using TaskEntity = TaskManagement.Core.Entities.Task;
 
 namespace TaskManagement.Presentation.Controllers;

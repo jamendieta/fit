@@ -7,14 +7,14 @@ namespace TaskManagement.Infrastructure.Tests;
 public class UnitTest1
 {
     [Fact]
-    public async System.Threading.Tasks.Task UserRepository_AddAndGetByUsername_Works()
+    public async Task UserRepository_AddAndGetByUsername_Works()
     {
         var connectionString = $"Data Source={Path.GetTempFileName()}";
         var initializer = new DatabaseInitializer(connectionString);
         await initializer.InitializeAsync();
 
         var repo = new UserRepository(connectionString);
-        await repo.AddAsync(new TaskManagement.Core.Entities.User
+        await repo.AddAsync(new Core.Entities.User
         {
             Username = "maria",
             Email = "maria@example.com",
@@ -28,7 +28,7 @@ public class UnitTest1
     }
 
     [Fact]
-    public async System.Threading.Tasks.Task TaskRepository_AddAndReadByUser_Works()
+    public async Task TaskRepository_AddAndReadByUser_Works()
     {
         var connectionString = $"Data Source={Path.GetTempFileName()}";
         var initializer = new DatabaseInitializer(connectionString);
@@ -36,7 +36,7 @@ public class UnitTest1
 
         var taskRepo = new TaskRepository(connectionString);
 
-        await taskRepo.AddAsync(new TaskManagement.Core.Entities.Task
+        await taskRepo.AddAsync(new Core.Entities.Task
         {
             Title = "Prepare demo",
             Description = "Get presentation ready",

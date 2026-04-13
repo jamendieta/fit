@@ -10,7 +10,7 @@ public class UnitTest1
     public async System.Threading.Tasks.Task AddTaskAsync_WithEmptyTitle_ThrowsArgumentException()
     {
         var service = new TaskService(new InMemoryTaskRepository());
-        var task = new TaskManagement.Core.Entities.Task
+        var task = new Core.Entities.Task
         {
             Title = "",
             Description = "demo",
@@ -43,26 +43,26 @@ public class UnitTest1
 
     private sealed class InMemoryTaskRepository : ITaskRepository
     {
-        private readonly List<TaskManagement.Core.Entities.Task> _tasks = [];
+        private readonly List<Core.Entities.Task> _tasks = [];
         private int _nextId = 1;
 
-        public System.Threading.Tasks.Task<IEnumerable<TaskManagement.Core.Entities.Task>> GetAllAsync() =>
-            System.Threading.Tasks.Task.FromResult<IEnumerable<TaskManagement.Core.Entities.Task>>(_tasks);
+        public Task<IEnumerable<Core.Entities.Task>> GetAllAsync() =>
+            System.Threading.Tasks.Task.FromResult<IEnumerable<Core.Entities.Task>>(_tasks);
 
-        public System.Threading.Tasks.Task<TaskManagement.Core.Entities.Task?> GetByIdAsync(int id) =>
+        public Task<Core.Entities.Task?> GetByIdAsync(int id) =>
             System.Threading.Tasks.Task.FromResult(_tasks.FirstOrDefault(x => x.Id == id));
 
-        public System.Threading.Tasks.Task<IEnumerable<TaskManagement.Core.Entities.Task>> GetByUserIdAsync(int userId) =>
-            System.Threading.Tasks.Task.FromResult<IEnumerable<TaskManagement.Core.Entities.Task>>(_tasks.Where(x => x.UserId == userId));
+        public Task<IEnumerable<Core.Entities.Task>> GetByUserIdAsync(int userId) =>
+            System.Threading.Tasks.Task.FromResult(_tasks.Where(x => x.UserId == userId));
 
-        public System.Threading.Tasks.Task AddAsync(TaskManagement.Core.Entities.Task task)
+        public System.Threading.Tasks.Task AddAsync(Core.Entities.Task task)
         {
             task.Id = _nextId++;
             _tasks.Add(task);
             return System.Threading.Tasks.Task.CompletedTask;
         }
 
-        public System.Threading.Tasks.Task UpdateAsync(TaskManagement.Core.Entities.Task task)
+        public System.Threading.Tasks.Task UpdateAsync(Core.Entities.Task task)
         {
             var idx = _tasks.FindIndex(x => x.Id == task.Id);
             if (idx >= 0) _tasks[idx] = task;
@@ -81,10 +81,10 @@ public class UnitTest1
         private readonly List<User> _users = [];
         private int _nextId = 1;
 
-        public System.Threading.Tasks.Task<User?> GetByIdAsync(int id) =>
+        public Task<User?> GetByIdAsync(int id) =>
             System.Threading.Tasks.Task.FromResult(_users.FirstOrDefault(x => x.Id == id));
 
-        public System.Threading.Tasks.Task<User?> GetByUsernameAsync(string username) =>
+        public Task<User?> GetByUsernameAsync(string username) =>
             System.Threading.Tasks.Task.FromResult(_users.FirstOrDefault(x => x.Username == username));
 
         public System.Threading.Tasks.Task AddAsync(User user)
